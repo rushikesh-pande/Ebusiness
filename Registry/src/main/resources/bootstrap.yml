@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: development
+  application:
+    name: Registry
+  
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+server.port: 8761
+eureka.client.register-with-eureka: false
+eureka.client.fetch-registry: false
