@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: development
+  application:
+    name: Registry
+  
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: false

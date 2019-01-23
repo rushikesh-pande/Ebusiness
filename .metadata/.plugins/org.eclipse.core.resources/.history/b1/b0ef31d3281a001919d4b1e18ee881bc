@@ -1,0 +1,56 @@
+package com.ebusiness.itemservice.dto;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+
+import org.springframework.data.annotation.Id;
+
+@Entity
+@Table(name = "Item", schema = "ebusiness")
+public class ItemDto {
+
+	@Id
+    @GeneratedValue
+    @Column(name="id")
+	private long id;
+	
+	@Column(name="name")
+	private String name;
+	
+	@Column(name="description")
+	private String description;
+	
+	@Column(name="price")
+	private int price;
+	
+	public ItemDto() {
+		
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+}

@@ -1,0 +1,49 @@
+package com.ebusiness.itemservice.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ebusiness.itemservice.dao.ItemRepository;
+import com.ebusiness.itemservice.domain.Item;
+import com.ebusiness.itemservice.dto.ItemDto;
+
+@Transactional
+@Service
+public class ItemServiceImpl implements  ItemService{
+
+	@Autowired
+	ItemRepository itemRepo;
+	
+	
+	private ModelMapper modelMapper;
+	
+	public  ItemServiceImpl() {
+		modelMapper  = new ModelMapper();
+	}
+	
+	@Override
+	
+	public Item save(Item item) {
+		ItemDto returnItem= itemRepo.save(modelMapper.map(item,ItemDto.class)); 
+		
+		return modelMapper.map(returnItem, Item.class);
+	}
+
+	@Override
+	public Item getItemDetails(String name) {
+		//return modelMapper.map(itemRepo.findByName(name), Item.class);
+		return null;
+	}
+
+	@Override
+	public List<Item> getAllItems() {
+		return itemRepo.findAll().stream().map(item -> modelMapper.map(item, Item.class))
+				.collect(Collectors.toList());
+	}
+}

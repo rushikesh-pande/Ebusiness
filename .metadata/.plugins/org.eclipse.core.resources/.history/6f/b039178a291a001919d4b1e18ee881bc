@@ -1,0 +1,12 @@
+package com.ebusiness.itemservice.dao;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ebusiness.itemservice.dto.ItemDto;
+
+@Transactional
+public interface ItemRepository extends JpaRepository<ItemDto, Long> {
+
+}

@@ -1,0 +1,9 @@
+package com.ebusiness.itemservice.config;
+
+@Configuration
+@EnableWebSecurity
+@EnableWebMvc
+@Order(1)
+public class SecurityConfiguration {
+
+}

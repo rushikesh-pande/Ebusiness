@@ -1,0 +1,43 @@
+package com.ebusiness.itemservice.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.ebusiness.itemservice.domain.Item;
+import com.ebusiness.itemservice.service.ItemService;
+
+@RequestMapping("/items")
+@RestControllerAdvice
+@RestController
+public class ItemServiceController {
+	
+	@Autowired
+	ItemService  itemService;
+	
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/")
+	public List<Item> all() {
+		return itemService.getAllItems();
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/{itemName}")
+	public Item get(@PathVariable String itemName) {
+		return itemService.getItemDetails(itemName);
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@PutMapping("/{itemName}")
+	public Item put(@PathVariable String itemName,@RequestBody Item itemDTO) {
+		
+	}
+}

@@ -1,0 +1,10 @@
+server:
+  port: 8082
+spring:
+  profiles:
+    active: development
+  application:
+    name: itemservice
+#  cloud:
+#    config:
+#      uri: http://localhost:5055

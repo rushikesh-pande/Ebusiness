@@ -1,0 +1,29 @@
+package com.ebusiness.itemservice.service;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ebusiness.itemservice.dao.ItemRepository;
+import com.ebusiness.itemservice.domain.Item;
+import com.ebusiness.itemservice.dto.ItemDto;
+
+public class ItemServiceImpl implements  ItemService{
+
+	@Autowired
+	ItemRepository itemRepo;
+	
+	@Autowired
+	private ModelMapper modelMapper;
+	
+	@Override
+	public Item save(Item item) {
+		ItemDto returnItem= itemRepo.save(modelMapper.map(item,ItemDto.class)); 
+		return modelMapper.map(returnItem, Item.class);
+	}
+
+	@Override
+	public Item getItemDetails(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

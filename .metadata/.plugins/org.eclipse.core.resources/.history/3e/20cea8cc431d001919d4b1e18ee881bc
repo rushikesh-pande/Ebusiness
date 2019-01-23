@@ -1,0 +1,11 @@
+package com.ebusiness.itemservice.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+@Profile("development")
+@Configuration
+public class DevelopmentConfiguration {
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(DevelopmentConfiguration.class);
+}

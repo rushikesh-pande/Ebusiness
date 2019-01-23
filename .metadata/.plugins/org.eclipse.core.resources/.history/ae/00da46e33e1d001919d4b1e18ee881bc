@@ -1,0 +1,14 @@
+package com.ebusiness.itemservice.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.ebusiness.itemservice.domain.Item;
+
+@Service
+public interface ItemService {
+	public Item save(Item item);
+	public Item getItemDetails(String name);
+	public List<Item> getAllItems();
+}

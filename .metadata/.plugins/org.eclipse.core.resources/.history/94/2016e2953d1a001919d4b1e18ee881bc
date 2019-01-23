@@ -1,0 +1,12 @@
+package com.ebusiness.itemservice.service;
+
+import com.ebusiness.itemservice.domain.Item;
+
+public class ItemServiceImpl implements  ItemService{
+
+	@Override
+	public Item save(Item item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

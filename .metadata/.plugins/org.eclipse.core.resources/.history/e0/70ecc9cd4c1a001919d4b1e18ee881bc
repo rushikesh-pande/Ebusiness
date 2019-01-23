@@ -1,0 +1,9 @@
+package com.ebusiness.itemservice.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RequestMapping("/items")
+@RestControllerAdvice
+@RestController
+public class ItemServiceController {
+}

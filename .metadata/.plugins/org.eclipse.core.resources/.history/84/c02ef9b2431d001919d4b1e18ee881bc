@@ -1,0 +1,8 @@
+package com.ebusiness.itemservice.config;
+
+public class Snippet {
+	public static void main(String[] args) {
+		DevelopmentConfiguration
+	}
+}
+

@@ -1,0 +1,8 @@
+package com.ebusiness.itemservice.service;
+
+import com.ebusiness.itemservice.domain.Item;
+
+public interface ItemService {
+	public Item save(Item item);
+	public Item getItemDetails(String name);
+}

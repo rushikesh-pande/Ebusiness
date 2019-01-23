@@ -1,0 +1,7 @@
+package com.ebusiness.itemservice.config;
+
+@Profile("development")
+@Configuration
+public class DevelopmentConfiguration {
+
+}

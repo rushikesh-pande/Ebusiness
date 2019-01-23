@@ -1,0 +1,18 @@
+package com.ebusiness.itemservice.dao;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.ebusiness.itemservice.dto.ItemDto;
+
+@Transactional
+@Repository
+public interface ItemRepository extends JpaRepository<ItemDto, Long> {
+	@Override
+	default <S extends ItemDto> S save(S entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

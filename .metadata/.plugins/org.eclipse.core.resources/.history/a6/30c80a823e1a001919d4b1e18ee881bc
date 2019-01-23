@@ -1,0 +1,22 @@
+package com.ebusiness.itemservice.service;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ebusiness.itemservice.dao.ItemRepository;
+import com.ebusiness.itemservice.domain.Item;
+
+public class ItemServiceImpl implements  ItemService{
+
+	@Autowired
+	ItemRepository itemRepo;
+	
+	@Autowired
+	private ModelMapper modelMapper;
+	
+	@Override
+	public Item save(Item item) {
+		//Item returnItem= itemRepo.save(entity) 
+		return null;
+	}
+}

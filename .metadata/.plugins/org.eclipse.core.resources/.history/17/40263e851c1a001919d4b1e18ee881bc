@@ -1,0 +1,5 @@
+package com.ebusiness.itemservice.dto;
+
+public class ItemDto {
+
+}

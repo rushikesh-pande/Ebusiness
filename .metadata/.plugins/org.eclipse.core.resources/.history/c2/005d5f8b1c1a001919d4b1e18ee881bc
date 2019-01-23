@@ -1,0 +1,7 @@
+package com.ebusiness.itemservice.dao;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface ItemServiceDao extends CrudRepository<T, ID> {
+
+}

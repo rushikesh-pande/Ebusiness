@@ -1,0 +1,14 @@
+package com.ebusiness.itemservice.service;
+
+import com.ebusiness.itemservice.dao.ItemRepository;
+import com.ebusiness.itemservice.domain.Item;
+
+public class ItemServiceImpl implements  ItemService{
+
+	ItemRepository itemRepo;
+	@Override
+	public Item save(Item item) {
+		//Item returnItem= 
+		return null;
+	}
+}
