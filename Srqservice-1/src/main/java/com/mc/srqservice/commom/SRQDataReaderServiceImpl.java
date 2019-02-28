@@ -2,10 +2,15 @@ package com.mc.srqservice.commom;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import com.mc.srqservice.domain.Feature;
 import com.mc.srqservice.domain.SrqDomain;
+import com.mc.srqservice.domain.SrqStatus;
+import com.mc.srqservice.domain.StroryFeature;
 import com.mc.srqservice.domain.UserStories;
 
 @Service
@@ -148,5 +155,83 @@ public class SRQDataReaderServiceImpl {
 		}
 		
 		return featuresList;
+	}
+	
+	public Predicate<SrqDomain> getSRQList(String feature){
+		return p->p.getFeature().equalsIgnoreCase(feature) ;
+	}
+	
+	public List<StroryFeature> getStrucutredFeatureList() throws IOException{
+		List<SrqDomain> srqDomainsListFromCSV = csvReaders.parseCSVToBeanList();
+		//List<SrqDomain> list1 = new ArrayList<SrqDomain>();
+		List<StroryFeature> featuresList = new ArrayList<StroryFeature>();
+		//List<StroryFeature> featuresList1 = new ArrayList<StroryFeature>();
+		
+		for(SrqDomain srqDomain:srqDomainsListFromCSV) {
+			StroryFeature feature = new StroryFeature();
+			
+			List<SrqDomain> srqDomainList=srqDomainsListFromCSV.stream().distinct().filter(this.getSRQList(srqDomain.getFeature() ))
+					.collect(Collectors.<SrqDomain> toList());
+			
+			/*Set<SrqDomain> deptSet = srqDomainList.stream()
+	                .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(SrqDomain::getFeature))));
+			deptSet.forEach(dept -> list1.add(dept));*/
+			
+			//srqDomainList = srqDomainList.stream().collect(Collectors.toSet()).stream().collect(Collectors.toList());
+			feature.setFeatureId(srqDomain.getFeature());
+			//srqDomainList = srqDomainList.subList(0, 1);
+			feature.setSrqList(srqDomainList);
+			//feature.setSrqList(list1);
+			featuresList.add(feature);
+		}
+		
+		return featuresList;
+	}
+	
+	
+	public List<SrqStatus> getStoryStatus() throws IOException{
+		Map<String, Integer> statusMap = new HashMap<String, Integer>();
+		List<SrqStatus> statusList = new ArrayList<SrqStatus>();
+		List<SrqDomain> srqDomainsListFromCSV = csvReaders.parseCSVToBeanList();
+		for(SrqDomain srqDomain:srqDomainsListFromCSV) {
+			SrqStatus srqStatus  = new SrqStatus();
+			List<SrqDomain> srqDomainList=srqDomainsListFromCSV.stream().distinct().filter(this.getSRQList(srqDomain.getFeature() ))
+					.collect(Collectors.<SrqDomain> toList());
+			
+			/*List<SrqDomain> srqDomainList=srqDomainsListFromCSV.stream().distinct()
+					.collect(Collectors.<SrqDomain> toList());*/
+			
+			List<SrqDomain> readytoShipList = srqDomainList.stream().distinct().
+					filter(x->x.getScheduleState().equalsIgnoreCase("Ready to Ship")).collect(Collectors.<SrqDomain> toList());
+			
+			
+			
+			/*List<SrqDomain> unique = readytoShipList.stream()
+                    .collect(Collectors.toCollection(ArrayList::new));*/
+                    
+                    
+                    
+                   /* new TreeSet<>(comparingInt(SrqDomain::))),
+                                               ArrayList::new));*/
+			
+			statusMap.put("Ready to Ship", readytoShipList.size());
+			List<SrqDomain> completedList = srqDomainList.stream().distinct().
+					filter(x->x.getScheduleState().equalsIgnoreCase("Completed")).collect(Collectors.<SrqDomain> toList());
+			statusMap.put("Completed", completedList.size());
+			
+			srqStatus.setName(srqDomain.getFeature());
+			srqStatus.setCount(statusMap);
+			statusList.add(srqStatus);
+		}
+		
+		/*Set<SrqStatus> deptSet = statusList.stream().distinct()
+                .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(SrqStatus::getName))));
+		deptSet.forEach(dept -> statusList.add(dept));*/
+		
+		Set deptSet = new HashSet<>();
+		 
+		statusList.removeIf(p -> !deptSet.add(p.getName()));
+		
+		return statusList;
 	}
 }
