@@ -54,6 +54,7 @@ public  List<SrqDomain> parseCSVToBeanList() throws IOException {
 		columnMapping.put("Schedule State", "scheduleState");
 		columnMapping.put("Blocked", "Blocked");
 		columnMapping.put("Display Color", "displaycolor");
+		columnMapping.put("Created By", "createdBy");
 		columnMapping.put("Owner", "Owner");
 		columnMapping.put("Creation Date", "creationDate");
 		columnMapping.put("Iteration", "Iteration");
